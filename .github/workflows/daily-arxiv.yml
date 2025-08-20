@@ -1,0 +1,48 @@
+name: Daily arXiv Digest
+
+on:
+  schedule:
+    # 每天 07:00（UTC）跑一次。你在欧洲/伦敦，可按需调整
+    - cron: "0 7 * * *"
+  workflow_dispatch: {}  # 允许手动触发
+
+permissions:
+  contents: write  # 允许向仓库提交
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true  # 允许后续 push
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install deps
+        run: |
+          python -m pip install --upgrade pip
+          pip install arxiv
+
+      # 如果你要调用 OpenAI，总结论文，则把 OPENAI_API_KEY 配成 repo secret
+      # - name: Export secrets
+      #   run: echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> $GITHUB_ENV
+
+      - name: Generate markdown
+        run: python generate_md.py
+
+      - name: Commit & Push changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: update daily digest ($(date -u +'%Y-%m-%d'))"
+            git push
+          fi
