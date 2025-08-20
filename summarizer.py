@@ -304,46 +304,51 @@ def summarize_pdf(pdf_path_or_url: str) -> Dict[str, Any]:
     return merge_partials(parts)
 
 
-def summary_to_markdown(s: Dict[str, Any]) -> str:
-    md = f"""
-    <details>
-    <summary>📄 Paper Summary (click to expand)</summary>
+def summary_to_markdown(s: dict) -> str:
+    # Build the inner body first (纯 Markdown，不要额外缩进)
+    body = f"""
+### 1. Task / Problem
+{s['task']}
 
-    ### 1. Task / Problem
-    {s['task']}
+### 2. Motivation & Gaps
+{s['motivation_and_gaps']['overview']}
+""".lstrip()
 
-    ### 2. Motivation & Gaps
-    {s['motivation_and_gaps']['overview']}
-    """
-
-    # Related work challenges
-    rws = s['motivation_and_gaps'].get('related_work_challenges') or []
+    rws = s.get('motivation_and_gaps', {}).get('related_work_challenges') or []
     if rws:
-        md += "\n**Related work challenges:**\n"
+        body += "\n**Related work challenges:**\n"
         for item in rws:
-            md += f"- {item.get('work','?')}: {item.get('challenge','')}\n"
+            body += f"- {item.get('work','?')}: {item.get('challenge','')}\n"
 
-    md += f"""
-    ### 3. Core Idea
-    {s['core_idea']}
+    body += f"""
+### 3. Core Idea
+{s['core_idea']}
 
-    ### 4. Method
-    - **Pipeline**: {s['method']['pipeline']}
-    - **Architecture / Loss / Training**: {s['method']['architecture_loss_training']}
-    - **Complexity / Resources**: {s['method']['complexity_resources']}
+### 4. Method
+- **Pipeline**: {s['method']['pipeline']}
+- **Architecture / Loss / Training**: {s['method']['architecture_loss_training']}
+- **Complexity / Resources**: {s['method']['complexity_resources']}
 
-    ### 5. Experiments
-    - **Datasets & Metrics**: {s['experiments']['datasets_and_metrics']}
-    - **Baselines**: {", ".join(s['experiments']['baselines']) if s['experiments']['baselines'] else "N/A"}
-    - **Main Results**: {s['experiments']['main_results']}
-    - **Ablations**: {s['experiments']['ablations']}
-    - **Limitations / Stress Tests**: {s['experiments']['limitations_tests']}
+### 5. Experiments
+- **Datasets & Metrics**: {s['experiments']['datasets_and_metrics']}
+- **Baselines**: {", ".join(s['experiments']['baselines']) if s['experiments']['baselines'] else "N/A"}
+- **Main Results**: {s['experiments']['main_results']}
+- **Ablations**: {s['experiments']['ablations']}
+- **Limitations / Stress Tests**: {s['experiments']['limitations_tests']}
 
-    ### 6. Takeaways
-    - **Pros**: {", ".join(s['takeaways']['pros_3'])}
-    - **Cons**: {", ".join(s['takeaways']['cons_3'])}
-    - **Future Work**: {", ".join(s['takeaways']['future_3'])}
+### 6. Takeaways
+- **Pros**: {", ".join(s['takeaways']['pros_3'])}
+- **Cons**: {", ".join(s['takeaways']['cons_3'])}
+- **Future Work**: {", ".join(s['takeaways']['future_3'])}
+""".rstrip()
 
-    </details>
-    """
-    return md
+    # 关键：在 <details> 前插入一个注释，打断列表/缩进上下文；且保证没有前导空格
+    toggle_block = (
+        "\n<!--break-out-of-list-->\n"
+        "<details>\n"                          # 如需默认展开，用 <details open>
+        "<summary>📄 Paper Summary (click to expand)</summary>\n\n"
+        f"{body}\n\n"
+        "</details>\n"
+    )
+
+    return toggle_block
