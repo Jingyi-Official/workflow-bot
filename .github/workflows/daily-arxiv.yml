@@ -3,7 +3,7 @@ name: Daily arXiv Digest
 on:
   schedule:
     # 每天 07:00（UTC）跑一次。你在欧洲/伦敦，可按需调整
-    - cron: "0 7 * * *"
+    - cron: "*/5 * * * *"  
   workflow_dispatch: {}  # 允许手动触发
 
 permissions:
