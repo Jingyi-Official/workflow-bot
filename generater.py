@@ -96,13 +96,13 @@ def main():
                     summary_md = summary_to_markdown(summary)
 
                     # Prepend a small paper header with link/date
-                    paper_head = f"### {title} [PDF]({pdf_url})\n\n"
+                    paper_head = f"### [{title}]({pdf_url})\n\n"
                     append_text(out_md, paper_head + summary_md)
 
                     # Update existing cache to avoid duplicates in the same run
                     existing += entry_id
                 except Exception as e:
-                    append_text(out_md, f"### {title} [PDF]({pdf_url})\n  (summary failed: {e})\n\n")
+                    append_text(out_md, f"### [{title}]({pdf_url})\n  (summary failed: {e})\n\n")
 
     # Optional: update README with a link to today's digest
     readme_path = "README.md"

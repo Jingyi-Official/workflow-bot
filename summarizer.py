@@ -316,6 +316,7 @@ def summary_to_markdown(s: Dict[str, Any]) -> str:
     {s['motivation_and_gaps']['overview']}
     """
 
+    # Related work challenges
     rws = s['motivation_and_gaps'].get('related_work_challenges') or []
     if rws:
         md += "\n**Related work challenges:**\n"
