@@ -115,12 +115,12 @@ def run_daily_digest(
                 try:
                     summary = summarize_pdf_fn(pdf_url)
                     summary_md = summary_to_markdown_fn(summary)
-                    paper_head = f"### [{title}]({pdf_url})\n\n"
+                    paper_head = f"\n### [{title}]({pdf_url})\n\n"
                     append_text(out_md, paper_head + summary_md)
                     # Update existing cache to avoid duplicates in the same run
                     existing += entry_id
                 except Exception as e:
-                    append_text(out_md, f"### [{title}]({pdf_url})\n  (summary failed: {e})\n\n")
+                    append_text(out_md, f"\n### [{title}]({pdf_url})\n  (summary failed: {e})\n\n")
 
     # Optional: update README with a link to today's digest
     readme_path = "README.md"

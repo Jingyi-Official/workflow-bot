@@ -323,7 +323,7 @@ def summary_to_markdown(s: dict) -> str:
     if rws:
         body += "\n- **Related work challenges:**\n"
         for item in rws:
-            body += f"-- {item.get('work','?')}: {item.get('challenge','')}\n"
+            body += f"  - {item.get('work','?')}: {item.get('challenge','')}\n"
 
     body += f"""
 ### 3. Core Idea

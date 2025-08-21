@@ -9,7 +9,6 @@ from openai_bot import summarize_pdf, summary_to_markdown
 KEYWORDS = dict()
 KEYWORDS["3D reconstruction"] = ["neural rendering"]
 
-# 每个关键词最多抓取多少篇
 MAX_RESULTS = 1
 
 
@@ -24,7 +23,4 @@ def main():
 
 
 if __name__ == "__main__":
-    # 运行前需提供 OPENAI_API_KEY（以及可选的 OPENAI_MODEL）
-    if not os.getenv("OPENAI_API_KEY"):
-        raise RuntimeError("Please set OPENAI_API_KEY as a secret or environment variable.")
     main()
