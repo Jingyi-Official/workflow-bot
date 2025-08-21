@@ -10,7 +10,7 @@ from summarizer import summarize_pdf, summary_to_markdown
 KEYWORDS = dict()
 KEYWORDS["3D reconstruction"] = ["neural rendering"]
 
-MAX_RESULTS = 1
+MAX_RESULTS = 3
 
 # ----------- arXiv client -----------
 client = arxiv.Client(

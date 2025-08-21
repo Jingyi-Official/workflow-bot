@@ -1,0 +1,10 @@
+# core
+arxiv>=2.1.0
+openai>=1.10.0,<2        # 你的代码用 Chat Completions + json_object；这版兼容
+pypdf>=4.2.0
+tqdm>=4.66.0
+markdown>=3.6            # 把生成的 Markdown 转成 HTML 发邮件用
+
+# google calendar
+google-api-python-client>=2.140.0
+google-auth>=2.29.0

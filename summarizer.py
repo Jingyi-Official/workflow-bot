@@ -308,21 +308,21 @@ def summary_to_markdown(s: dict) -> str:
     # Build the inner body first (纯 Markdown，不要额外缩进)
     body = f"""
 ### 1. Task / Problem
-{s['task']}
+- {s['task']}
 
 ### 2. Motivation & Gaps
-{s['motivation_and_gaps']['overview']}
+- {s['motivation_and_gaps']['overview']}
 """.lstrip()
 
     rws = s.get('motivation_and_gaps', {}).get('related_work_challenges') or []
     if rws:
-        body += "\n**Related work challenges:**\n"
+        body += "\n- **Related work challenges:**\n"
         for item in rws:
-            body += f"- {item.get('work','?')}: {item.get('challenge','')}\n"
+            body += f"-- {item.get('work','?')}: {item.get('challenge','')}\n"
 
     body += f"""
 ### 3. Core Idea
-{s['core_idea']}
+- {s['core_idea']}
 
 ### 4. Method
 - **Pipeline**: {s['method']['pipeline']}
