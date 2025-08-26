@@ -2,11 +2,11 @@ name: Daily Digest Bot
 
 on:
   schedule:
-    - cron: "30 6 * * *"   # 每天 06:30 UTC 自动运行
-  workflow_dispatch:        # 手动触发
+    - cron: "30 6 * * *"   
+  workflow_dispatch:       
 
 permissions:
-  contents: write  # 允许向仓库提交
+  contents: write 
 
 jobs:
   run:
@@ -25,14 +25,12 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-      # 写入 credentials 文件
       - name: Write calendar credentials
         run: echo "${{ secrets.CREDENTIALS_CALENDAR_JSON }}" > credentials_calendar.json
 
       - name: Write gmail credentials
         run: echo "${{ secrets.CREDENTIALS_GMAIL_JSON }}" > credentials_gmail.json
 
-      # 如果需要，也写入 token 文件（确保你本地跑过并上传）
       - name: Write calendar token
         run: echo '${{ secrets.TOKEN_CALENDAR_JSON }}' > token_calendar.json
 
