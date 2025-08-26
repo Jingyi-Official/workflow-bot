@@ -1,0 +1,8 @@
+# 忽略 Google 凭证和 token
+credentials_*.json
+token_*.json
+
+# 忽略生成的每日 digest
+2025/
+
+credentials/

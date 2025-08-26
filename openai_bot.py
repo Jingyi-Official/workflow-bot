@@ -347,13 +347,12 @@ def summary_to_markdown(s: dict) -> str:
 - **Future Work**: {", ".join(s['takeaways']['future_3'])}
 """.rstrip()
 
-    # 关键：在 <details> 前插入一个注释，打断列表/缩进上下文；且保证没有前导空格
     toggle_block = (
-        "\n<!--break-out-of-list-->\n"
-        "<details>\n"
-        "<summary>📄 Paper Summary (click to expand)</summary>\n\n"
-        f"{body}\n\n"
-        "</details>\n"
-    )
+    "\n<!--break-out-of-list-->\n"
+    '<details markdown="1">\n'
+    "<summary>📄 Paper Summary </summary>\n\n"
+    f"{body}\n\n"
+    "</details>\n"
+)
 
     return toggle_block
