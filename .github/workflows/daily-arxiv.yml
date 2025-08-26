@@ -31,12 +31,10 @@ jobs:
 
       # 如果需要，也写入 token 文件（确保你本地跑过并上传）
       - name: Write calendar token
-        run: |
-          echo "${{ secrets.TOKEN_CALENDAR_JSON }}" > token_calendar.json
+        run: echo '${{ secrets.TOKEN_CALENDAR_JSON }}' > token_calendar.json
 
       - name: Write gmail token
-        run: |
-          echo "${{ secrets.TOKEN_GMAIL_JSON }}" > token_gmail.json
+        run: echo '${{ secrets.TOKEN_GMAIL_JSON }}' > token_gmail.json
 
       - name: Run workflow-bot
         env:
