@@ -52,6 +52,13 @@ export EMAIL_SUBJECT_PREFIX="[Daily Digest]"
 
 ### 5. Run the bot
 ```bash
+# Set Topics & Keywords in main.py
+KEYWORDS = dict()
+KEYWORDS["3D reconstruction"] = ["neural rendering"]
+
+MAX_RESULTS = 1
+
 python main.py
 ```
 Highly suggest to schedule the bot to run daily using GitHub Actions.
+- [2025-08-26 Digest](2025/08/26.md)
