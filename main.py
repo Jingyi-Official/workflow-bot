@@ -12,9 +12,9 @@ from jinja2 import Environment, FileSystemLoader
 
 # ----------- Topics & Keywords -----------
 KEYWORDS = dict()
-KEYWORDS["3D reconstruction"] = ["neural rendering"]
+KEYWORDS["3D reconstruction"] = ["neural rendering", "Gaussian Splatting", "avatar", "video understanding"]
 
-MAX_RESULTS = 1
+MAX_RESULTS = 3
 
 def main():
     # 1) ----------- generate daily arXiv digest -----------
