@@ -1,1 +1,4 @@
+credentials_*.json
+token_*.json
+
 credentials/
