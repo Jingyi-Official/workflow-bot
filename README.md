@@ -140,3 +140,5 @@ Highly suggest to schedule the bot to run daily using GitHub Actions.
 - [2025-10-03 Digest](2025/10/03.md)
 
 - [2025-10-04 Digest](2025/10/04.md)
+
+- [2025-10-05 Digest](2025/10/05.md)
