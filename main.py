@@ -12,7 +12,9 @@ from jinja2 import Environment, FileSystemLoader
 
 # ----------- Topics & Keywords -----------
 KEYWORDS = dict()
-KEYWORDS["3D reconstruction"] = ["neural rendering", "Gaussian Splatting", "avatar", "video understanding"]
+# KEYWORDS["3D reconstruction"] = ["neural rendering", "Gaussian Splatting", "avatar", "video understanding"]
+KEYWORDS["3D reconstruction"] = ["avatar", "video understanding"]
+KEYWORDS["deep learning"] = ["model collapse"]
 
 MAX_RESULTS = 3
 

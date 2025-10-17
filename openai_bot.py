@@ -325,6 +325,27 @@ def summary_to_markdown(s: dict) -> str:
         for item in rws:
             body += f"  - {item.get('work','?')}: {item.get('challenge','')}\n"
 
+#     body += f"""
+# ### 3. Core Idea
+# - {s['core_idea']}
+
+# ### 4. Method
+# - **Pipeline**: {s['method']['pipeline']}
+# - **Architecture / Loss / Training**: {s['method']['architecture_loss_training']}
+# - **Complexity / Resources**: {s['method']['complexity_resources']}
+
+# ### 5. Experiments
+# - **Datasets & Metrics**: {s['experiments']['datasets_and_metrics']}
+# - **Baselines**: {", ".join(s['experiments']['baselines']) if s['experiments']['baselines'] else "N/A"}
+# - **Main Results**: {s['experiments']['main_results']}
+# - **Ablations**: {s['experiments']['ablations']}
+# - **Limitations / Stress Tests**: {s['experiments']['limitations_tests']}
+
+# ### 6. Takeaways
+# - **Pros**: {", ".join(s['takeaways']['pros_3'])}
+# - **Cons**: {", ".join(s['takeaways']['cons_3'])}
+# - **Future Work**: {", ".join(s['takeaways']['future_3'])}
+# """.rstrip()
     body += f"""
 ### 3. Core Idea
 - {s['core_idea']}
@@ -333,18 +354,6 @@ def summary_to_markdown(s: dict) -> str:
 - **Pipeline**: {s['method']['pipeline']}
 - **Architecture / Loss / Training**: {s['method']['architecture_loss_training']}
 - **Complexity / Resources**: {s['method']['complexity_resources']}
-
-### 5. Experiments
-- **Datasets & Metrics**: {s['experiments']['datasets_and_metrics']}
-- **Baselines**: {", ".join(s['experiments']['baselines']) if s['experiments']['baselines'] else "N/A"}
-- **Main Results**: {s['experiments']['main_results']}
-- **Ablations**: {s['experiments']['ablations']}
-- **Limitations / Stress Tests**: {s['experiments']['limitations_tests']}
-
-### 6. Takeaways
-- **Pros**: {", ".join(s['takeaways']['pros_3'])}
-- **Cons**: {", ".join(s['takeaways']['cons_3'])}
-- **Future Work**: {", ".join(s['takeaways']['future_3'])}
 """.rstrip()
 
     toggle_block = (
