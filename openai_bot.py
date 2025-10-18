@@ -319,11 +319,11 @@ def summary_to_markdown(s: dict) -> str:
 - {s['motivation_and_gaps']['overview']}
 """.lstrip()
 
-    rws = s.get('motivation_and_gaps', {}).get('related_work_challenges') or []
-    if rws:
-        body += "\n- **Related work challenges:**\n"
-        for item in rws:
-            body += f"  - {item.get('work','?')}: {item.get('challenge','')}\n"
+    # rws = s.get('motivation_and_gaps', {}).get('related_work_challenges') or []
+    # if rws:
+    #     body += "\n- **Related work challenges:**\n"
+    #     for item in rws:
+    #         body += f"  - {item.get('work','?')}: {item.get('challenge','')}\n"
 
 #     body += f"""
 # ### 3. Core Idea
