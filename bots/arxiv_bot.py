@@ -2,7 +2,6 @@
 import os
 import re
 from datetime import datetime, timezone
-from textwrap import dedent
 from pathlib import Path
 from typing import Dict, List
 
@@ -90,13 +89,9 @@ def run_daily_digest(
     ensure_dir(out_dir)
     out_md = os.path.join(out_dir, f"{day}.md")
 
-    # Header (create if missing)
+    # Topic headings replace the redundant daily report title.
     if not os.path.exists(out_md):
-        today_full = now.strftime("%Y-%m-%d")
-        header = dedent(f"""\
-        # Daily Paper Digest · {today_full}
-        """)
-        write_text(out_md, header)
+        write_text(out_md, "")
 
     # Compare canonical IDs so PDF/abstract links and different versions deduplicate.
     existing = read_text(out_md)
@@ -107,10 +102,9 @@ def run_daily_digest(
     client = make_client(page_size=candidate_count)
 
     for topic, keywords in keywords_by_topic.items():
-        # 你可以将 topic 也写入分组（如果想显示 topic 标题，把下面一行取消注释）
-        # append_text(out_md, f"\n## {topic}\n")
+        append_text(out_md, f"\n## {topic}\n")
         for kw in keywords:
-            append_text(out_md, f"\n## {kw}\n")
+            append_text(out_md, f"\n### {kw}\n")
             results = get_papers(client, query=kw, max_results=candidate_count)
             ranker.note_api_request()
             if not results:

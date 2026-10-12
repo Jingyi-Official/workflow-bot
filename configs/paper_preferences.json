@@ -10,7 +10,9 @@
     "NVIDIA": ["NVIDIA", "nvidia.com"],
     "Kling / Kuaishou": ["Kuaishou", "Kling AI", "快手", "kuaishou.com"],
     "Tencent": ["Tencent", "腾讯", "tencent.com"],
-    "ByteDance": ["ByteDance", "字节跳动", "bytedance.com"]
+    "ByteDance": ["ByteDance", "字节跳动", "bytedance.com"],
+    "Xiaohongshu": ["Xiaohongshu", "REDnote", "小红书", "xiaohongshu.com"],
+    "Alibaba Group": ["Alibaba Group", "Alibaba", "阿里巴巴", "alibaba.com", "alibaba-inc.com"]
   },
   "institutions": {
     "Oxford": ["University of Oxford", "Oxford University", "ox.ac.uk"],
@@ -23,7 +25,13 @@
     "ETH Zurich": ["ETH Zurich", "ETH Zürich", "ethz.ch"],
     "EPFL": ["EPFL", "École Polytechnique Fédérale de Lausanne", "epfl.ch"],
     "Tsinghua": ["Tsinghua University", "清华大学", "tsinghua.edu.cn"],
-    "Peking University": ["Peking University", "北京大学", "pku.edu.cn"]
+    "Peking University": ["Peking University", "北京大学", "pku.edu.cn"],
+    "Fudan University": ["Fudan University", "复旦大学", "fudan.edu.cn"],
+    "Shanghai Jiao Tong University": ["Shanghai Jiao Tong University", "Shanghai Jiaotong University", "SJTU", "上海交通大学", "sjtu.edu.cn"],
+    "Shanghai AI Laboratory": ["Shanghai AI Laboratory", "Shanghai AI Lab", "Shanghai Artificial Intelligence Laboratory", "上海人工智能实验室", "shlab.org.cn"],
+    "CUHK": ["The Chinese University of Hong Kong", "Chinese University of Hong Kong", "CUHK", "香港中文大学", "香港中文大學", "cuhk.edu.hk"],
+    "Imperial College London": ["Imperial College London", "Imperial College", "ICL", "帝国理工学院", "帝國理工學院", "imperial.ac.uk"],
+    "UCL": ["University College London", "UCL", "伦敦大学学院", "倫敦大學學院", "ucl.ac.uk"]
   },
   "venues": {
     "CVPR": ["CVPR", "Conference on Computer Vision and Pattern Recognition"],

@@ -1,6 +1,8 @@
 # main.py
 import os
+import re
 from datetime import datetime
+from html import escape
 
 from bots import CONFIGS_DIR
 from bots.arxiv_bot import run_daily_digest
@@ -21,6 +23,43 @@ KEYWORDS["world models"] = ["world models"]
 # Final papers per keyword; preferences live in configs/paper_preferences.json.
 MAX_RESULTS = 3
 
+
+def paper_topic_sections(source: str, keywords_by_topic: dict) -> list[dict]:
+    """Group new topic headings and legacy keyword headings into email cards."""
+    keyword_topics = {
+        keyword: topic for topic, keywords in keywords_by_topic.items() for keyword in keywords
+    }
+    grouped = {}
+    current = None
+    def keyword_heading(label):
+        return (
+            '<h3 style="font-size:26px; line-height:1.3; font-weight:700; '
+            'margin:24px 0 16px;">' + escape(label) + '</h3>'
+        )
+
+    for line in source.splitlines():
+        if re.match(r"^# Daily Paper Digest\b", line):
+            continue
+        if line.startswith("## "):
+            heading = line[3:].strip()
+            current = heading if heading in keywords_by_topic else keyword_topics.get(heading, heading)
+            grouped.setdefault(current, [])
+            if heading != current:
+                grouped[current].append(keyword_heading(heading))
+            continue
+        if current is not None:
+            if line.startswith("### ") and line[4:].strip() in keywords_by_topic.get(current, []):
+                line = keyword_heading(line[4:].strip())
+            grouped[current].append(line)
+    return [
+        {"title": topic, "html": markdown(
+            "\n".join(lines), output_format="html5",
+            extensions=["extra", "sane_lists", "nl2br", "tables", "fenced_code", "md_in_html"],
+        )}
+        for topic, lines in grouped.items()
+    ]
+
+
 def main():
     # 1) ----------- generate daily arXiv digest -----------
     arXiv_md = run_daily_digest(
@@ -29,9 +68,7 @@ def main():
         summarize_pdf_fn=summarize_pdf,
         summary_to_markdown_fn=summary_to_markdown,
     )
-    arXiv_html = markdown(Path(arXiv_md).read_text(encoding="utf-8"),
-                      output_format="html5",
-                      extensions=["extra","sane_lists","nl2br","tables","fenced_code","toc","md_in_html"])
+    paper_topics = paper_topic_sections(Path(arXiv_md).read_text(encoding="utf-8"), KEYWORDS)
 
     # 2) ----------- generate daily Calendar digest -----------
     events = fetch_todays_events()
@@ -47,7 +84,7 @@ def main():
 
     combined_html = template.render(
         title=f"Daily Digest {today}",
-        arXiv_html=arXiv_html,
+        paper_topics=paper_topics,
         cal_html=cal_html
     )
 

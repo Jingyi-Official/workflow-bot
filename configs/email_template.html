@@ -56,14 +56,17 @@
 </head>
 <body>
   <h2>📅 Today's Calendar Digest</h2>
-  <div class="card" style="max-width:720px;"> 
+  <div style="max-width:720px; margin-bottom:24px;">
     {{ cal_html|safe }}
   </div>
 
   <h2>📄 Today's Paper Digest</h2>
+  {% for topic in paper_topics %}
   <div class="card" style="max-width:820px;">
-    {{ arXiv_html|safe }}
+    <h2 style="margin-top:0;">{{ topic.title|e }}</h2>
+    {{ topic.html|safe }}
   </div>
+  {% endfor %}
 
   
 </body>
