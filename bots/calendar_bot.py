@@ -13,6 +13,8 @@ Setup:
 """
 
 import os
+
+from . import PROJECT_DIR
 from datetime import datetime, timedelta, timezone
 from typing import List, Dict
 
@@ -22,8 +24,8 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"]
-CRED_PATH = os.getenv("CALENDAR_CREDENTIALS_PATH", "credentials_calendar.json")
-TOKEN_PATH = os.getenv("CALENDAR_TOKEN_PATH", "token_calendar.json")
+CRED_PATH = os.getenv("CALENDAR_CREDENTIALS_PATH", str(PROJECT_DIR / "credentials_calendar.json"))
+TOKEN_PATH = os.getenv("CALENDAR_TOKEN_PATH", str(PROJECT_DIR / "token_calendar.json"))
 
 
 def _get_tz() -> timezone:

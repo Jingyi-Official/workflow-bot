@@ -2,20 +2,23 @@
 import os
 from datetime import datetime
 
-from arxiv_bot import run_daily_digest
-from openai_bot import summarize_pdf, summary_to_markdown
-from calendar_bot import fetch_todays_events, events_to_markdown, events_to_html
-from email_bot import send_email
+from bots import CONFIGS_DIR
+from bots.arxiv_bot import run_daily_digest
+from bots.openai_bot import summarize_pdf, summary_to_markdown
+from bots.calendar_bot import fetch_todays_events, events_to_markdown, events_to_html
+from bots.email_bot import send_email
 from markdown import markdown
 from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 # ----------- Topics & Keywords -----------
 KEYWORDS = dict()
-# KEYWORDS["3D reconstruction"] = ["neural rendering", "Gaussian Splatting", "avatar", "video understanding"]
-KEYWORDS["3D reconstruction"] = ["avatar", "video understanding"]
 KEYWORDS["deep learning"] = ["model collapse"]
+KEYWORDS["digital humans and drivable avatars"] = ["head avatars", "full-body avatars", "audio-driven facial animation", "talking-head animation", "Lip Synchronization"]
+KEYWORDS["video generation"] = ["video generation", "diffusion models", "video Continuation", "temporal autoregression"]
+KEYWORDS["world models"] = ["world models"]
 
+# Final papers per keyword; preferences live in configs/paper_preferences.json.
 MAX_RESULTS = 3
 
 def main():
@@ -39,8 +42,8 @@ def main():
     subject_prefix = os.getenv("EMAIL_SUBJECT_PREFIX", "[Daily Digest]")
     subject = f"{subject_prefix} {today}"
 
-    env = Environment(loader=FileSystemLoader("."))
-    template = env.get_template("template.html")
+    env = Environment(loader=FileSystemLoader(str(CONFIGS_DIR)))
+    template = env.get_template("email_template.html")
 
     combined_html = template.render(
         title=f"Daily Digest {today}",

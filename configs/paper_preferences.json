@@ -1,0 +1,40 @@
+{
+  "priority_order": ["companies", "institutions", "venues"],
+  "candidate_multiplier": 10,
+  "max_candidates_per_query": 50,
+  "inspect_pdf_affiliations": true,
+  "request_delay_seconds": 3,
+  "companies": {
+    "Google / DeepMind": ["Google", "DeepMind", "google.com", "deepmind.com"],
+    "Meta": ["Meta AI", "Meta Platforms", "Meta", "Facebook AI Research", "facebook.com", "meta.com"],
+    "NVIDIA": ["NVIDIA", "nvidia.com"],
+    "Kling / Kuaishou": ["Kuaishou", "Kling AI", "快手", "kuaishou.com"],
+    "Tencent": ["Tencent", "腾讯", "tencent.com"],
+    "ByteDance": ["ByteDance", "字节跳动", "bytedance.com"]
+  },
+  "institutions": {
+    "Oxford": ["University of Oxford", "Oxford University", "ox.ac.uk"],
+    "Cambridge": ["University of Cambridge", "Cambridge University", "cam.ac.uk"],
+    "Stanford": ["Stanford University", "Stanford", "stanford.edu"],
+    "Inria": ["Inria", "inria.fr"],
+    "MIT": ["Massachusetts Institute of Technology", "MIT", "mit.edu"],
+    "UC Berkeley": ["University of California Berkeley", "University of California, Berkeley", "UC Berkeley", "berkeley.edu"],
+    "CMU": ["Carnegie Mellon University", "Carnegie Mellon", "cmu.edu"],
+    "ETH Zurich": ["ETH Zurich", "ETH Zürich", "ethz.ch"],
+    "EPFL": ["EPFL", "École Polytechnique Fédérale de Lausanne", "epfl.ch"],
+    "Tsinghua": ["Tsinghua University", "清华大学", "tsinghua.edu.cn"],
+    "Peking University": ["Peking University", "北京大学", "pku.edu.cn"]
+  },
+  "venues": {
+    "CVPR": ["CVPR", "Conference on Computer Vision and Pattern Recognition"],
+    "ICLR": ["ICLR", "International Conference on Learning Representations"],
+    "ICCV": ["ICCV", "International Conference on Computer Vision"],
+    "ECCV": ["ECCV", "European Conference on Computer Vision"],
+    "NeurIPS": ["NeurIPS", "NIPS", "Advances in Neural Information Processing Systems", "Conference on Neural Information Processing Systems"],
+    "ICML": ["ICML", "International Conference on Machine Learning"],
+    "SIGGRAPH": ["SIGGRAPH"],
+    "TPAMI": ["TPAMI", "IEEE Transactions on Pattern Analysis and Machine Intelligence"],
+    "IJCV": ["IJCV", "International Journal of Computer Vision"],
+    "TOG": ["ACM Transactions on Graphics", "ACM TOG"]
+  }
+}

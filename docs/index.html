@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="将 arXiv 论文摘要与今日行程汇成日报，发送到你指定的邮箱。">
+<title>论文与行程，一封邮件掌握。 · Workflow Bot</title>
+<style>
+:root{color-scheme:light;--ink:#152b29;--muted:#536763;--line:#d6e1db;--accent:#17654e;--paper:#f6f8f4}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.8 system-ui,-apple-system,"Segoe UI","PingFang SC",sans-serif}a{color:var(--accent);text-underline-offset:4px}a:hover{text-decoration:underline}header,main,footer{max-width:960px;margin:auto;padding:0 32px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:24px;padding-bottom:24px;border-bottom:1px solid var(--line)}.brand{color:var(--ink);font-weight:750;text-decoration:none;letter-spacing:-.5px}nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}nav a{font-size:14px;text-decoration:none}nav a[aria-current=page]{text-decoration:underline}select{font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink)}.hero{padding:64px 0 36px}.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:2px}h1{font-size:clamp(32px,5vw,52px);line-height:1.2;letter-spacing:-1.5px;margin:16px 0 22px}h2{font-size:21px;line-height:1.5;display:flex;gap:16px;align-items:baseline;margin:0 0 18px}h2 small{font:12px ui-monospace,monospace;color:var(--accent)}h3{font-size:18px;margin:0 0 8px}p{margin:0 0 14px;color:var(--muted)}.lead{font-size:19px;max-width:680px}.actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:26px}.button{display:inline-block;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600}section{padding:30px 0;border-top:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.grid p{font-size:15px}ol{padding-left:24px;color:var(--muted)}li{padding:5px 0}code{font:14px ui-monospace,monospace;background:#e7eee8;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{background:var(--ink);color:#eff6ef;padding:18px 22px;border-radius:8px;overflow:auto}pre code{background:none;color:inherit;padding:0}.note{border-left:3px solid var(--accent);padding:12px 18px;background:#eaf0e9;margin-top:18px}.note p{margin:0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}footer{padding-top:24px;padding-bottom:32px;font-size:13px;color:var(--muted)}:focus-visible{outline:3px solid #c58e33;outline-offset:4px}@media(max-width:640px){header,main,footer{padding-left:20px;padding-right:20px}header{align-items:flex-start;flex-direction:column;gap:10px}nav{gap:16px}.hero{padding-top:40px}.grid{grid-template-columns:1fr;gap:16px}h1{letter-spacing:-.8px}}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" data-page="index.html" href="index.html">Workflow Bot<span aria-hidden="true"> ↗</span></a>
+<nav aria-label="Navigation / 导航">
+<a data-page="index.html" href="index.html" aria-current="page"><span data-zh="项目介绍" data-en="Overview">项目介绍</span></a>
+<a data-page="privacy.html" href="privacy.html"><span data-zh="隐私说明" data-en="Privacy">隐私说明</span></a>
+<label class="sr-only" for="language"><span data-zh="选择语言" data-en="Select language">选择语言</span></label>
+<select id="language"><option value="zh">中文</option><option value="en">English</option></select>
+</nav>
+</header>
+<main>
+<div class="hero"><div class="eyebrow">DAILY WORKFLOW BOT</div><h1><span data-zh="论文与行程，一封邮件掌握。" data-en="Papers and plans. One daily email.">论文与行程，一封邮件掌握。</span></h1><p class="lead"><span data-zh="将 arXiv 论文摘要与今日行程汇成日报，发送到你指定的邮箱。" data-en="Bring arXiv paper summaries and today’s schedule into a digest sent to your chosen inbox.">将 arXiv 论文摘要与今日行程汇成日报，发送到你指定的邮箱。</span></p></div>
+<div class="actions"><a class="button" href="https://github.com/Jingyi-Official/workflow-bot"><span data-zh="查看源码与配置" data-en="Source &amp; setup">查看源码与配置</span></a><a data-page="privacy.html" href="privacy.html"><span data-zh="了解数据使用" data-en="How data is used">了解数据使用</span></a></div><section><h2><small>01</small><span data-zh="主要功能" data-en="What it does">主要功能</span></h2><div class="grid"><article><h3><span data-zh="论文摘要" data-en="Paper summaries">论文摘要</span></h3><p><span data-zh="按关键词检索 arXiv 论文，利用 AI 生成结构化摘要。" data-en="Find arXiv papers by keyword and generate structured AI summaries.">按关键词检索 arXiv 论文，利用 AI 生成结构化摘要。</span></p></article><article><h3><span data-zh="今日行程" data-en="Today’s schedule">今日行程</span></h3><p><span data-zh="只读获取 Google Calendar 当天日程，整理时间、地点和会议链接。" data-en="Read today’s Google Calendar events, including times, locations and meeting links.">只读获取 Google Calendar 当天日程，整理时间、地点和会议链接。</span></p></article><article><h3><span data-zh="邮件汇总" data-en="Email digest">邮件汇总</span></h3><p><span data-zh="通过 Gmail 发送 HTML 日报，并将论文摘要保存为 Markdown。" data-en="Send an HTML digest through Gmail and save paper summaries as Markdown.">通过 Gmail 发送 HTML 日报，并将论文摘要保存为 Markdown。</span></p></article></div></section><section><h2><small>02</small><span data-zh="开始使用" data-en="Get started">开始使用</span></h2><ol><li><span data-zh="安装 Python 3.12，并在项目目录安装依赖。" data-en="Install Python 3.12 and the dependencies in the project directory.">安装 Python 3.12，并在项目目录安装依赖。</span></li><li><span data-zh="启用 Google Calendar 与 Gmail API，准备 OAuth 凭据；首次运行完成账号授权。" data-en="Enable the Google Calendar and Gmail APIs, prepare OAuth credentials, and authorize your account on the first run.">启用 Google Calendar 与 Gmail API，准备 OAuth 凭据；首次运行完成账号授权。</span></li><li><span data-zh="设置 OPENAI_API_KEY、EMAIL_FROM 和 EMAIL_TO；在 main.py 中配置关键词和论文数量。" data-en="Set OPENAI_API_KEY, EMAIL_FROM and EMAIL_TO; configure keywords and paper limits in main.py.">设置 OPENAI_API_KEY、EMAIL_FROM 和 EMAIL_TO；在 main.py 中配置关键词和论文数量。</span></li><li><span data-zh="运行程序，或配置 GitHub Actions 定时生成日报。" data-en="Run the bot, or configure GitHub Actions to generate scheduled digests.">运行程序，或配置 GitHub Actions 定时生成日报。</span></li></ol><pre><code>pip install -r requirements.txt
+python main.py</code></pre></section><section><h2><small>03</small><span data-zh="使用前须知" data-en="Before you run">使用前须知</span></h2><p><span data-zh="这是需自行配置和运行的开源工具。网页不提供登录、账号授权或日报发送功能。" data-en="This is an open-source tool you configure and run yourself. These pages do not sign you in, authorize accounts or send digests.">这是需自行配置和运行的开源工具。网页不提供登录、账号授权或日报发送功能。</span></p><p><span data-zh="AI 摘要可能遗漏或误解信息，请以原论文为准。请仅向可信收件人发送包含日程的日报。" data-en="AI summaries may miss or misinterpret information; check the original paper. Send digests containing calendar details only to trusted recipients.">AI 摘要可能遗漏或误解信息，请以原论文为准。请仅向可信收件人发送包含日程的日报。</span></p></section>
+<noscript><p>语言切换需要启用 JavaScript。 / Enable JavaScript to switch languages.</p></noscript>
+</main>
+<footer>Workflow Bot · <a href="https://github.com/Jingyi-Official/workflow-bot">GitHub</a> · <span data-zh="自主部署，每日汇总。" data-en="Self-hosted. Delivered daily.">自主部署，每日汇总。</span></footer>
+<script>
+(() => {
+  const select = document.getElementById('language');
+  const valid = value => value === 'zh' || value === 'en';
+  function apply(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-zh][data-en]').forEach(node => {
+      node.textContent = node.dataset[lang];
+    });
+    document.title = document.querySelector('h1').textContent + ' · Workflow Bot';
+    document.querySelector('meta[name="description"]').content = document.querySelector('.lead').textContent;
+    select.value = lang;
+    document.querySelectorAll('a[data-page]').forEach(link => {
+      link.href = link.dataset.page + '?lang=' + lang;
+    });
+  }
+  let saved;
+  try { saved = localStorage.getItem('workflow-bot-language'); } catch (_) {}
+  const query = new URLSearchParams(location.search).get('lang');
+  apply(valid(query) ? query : valid(saved) ? saved : navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en');
+  select.addEventListener('change', () => {
+    apply(select.value);
+    try { localStorage.setItem('workflow-bot-language', select.value); } catch (_) {}
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set('lang', select.value);
+      history.replaceState(null, '', url);
+    } catch (_) {}
+  });
+})();
+</script>
+</body>
+</html>

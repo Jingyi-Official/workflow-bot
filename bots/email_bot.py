@@ -17,6 +17,8 @@ pip install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 
 import base64
 import os
+
+from . import PROJECT_DIR
 from typing import List, Optional
 from email.message import EmailMessage
 
@@ -26,8 +28,8 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 SCOPES = ["https://www.googleapis.com/auth/gmail.send"]
-CRED_PATH = os.getenv("GMAIL_CREDENTIALS_PATH", "credentials_gmail.json")
-TOKEN_PATH = os.getenv("GMAIL_TOKEN_PATH", "token_gmail.json")
+CRED_PATH = os.getenv("GMAIL_CREDENTIALS_PATH", str(PROJECT_DIR / "credentials_gmail.json"))
+TOKEN_PATH = os.getenv("GMAIL_TOKEN_PATH", str(PROJECT_DIR / "token_gmail.json"))
 
 
 def _authorize():

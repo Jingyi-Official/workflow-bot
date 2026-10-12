@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="了解页面保存什么，以及运行 Workflow Bot 时数据如何流转。">
+<title>隐私与数据使用 · Workflow Bot</title>
+<style>
+:root{color-scheme:light;--ink:#152b29;--muted:#536763;--line:#d6e1db;--accent:#17654e;--paper:#f6f8f4}*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:16px/1.8 system-ui,-apple-system,"Segoe UI","PingFang SC",sans-serif}a{color:var(--accent);text-underline-offset:4px}a:hover{text-decoration:underline}header,main,footer{max-width:960px;margin:auto;padding:0 32px}header{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:24px;padding-bottom:24px;border-bottom:1px solid var(--line)}.brand{color:var(--ink);font-weight:750;text-decoration:none;letter-spacing:-.5px}nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap}nav a{font-size:14px;text-decoration:none}nav a[aria-current=page]{text-decoration:underline}select{font:inherit;font-size:14px;padding:6px 10px;border:1px solid var(--line);border-radius:6px;background:white;color:var(--ink)}.hero{padding:64px 0 36px}.eyebrow{color:var(--accent);font-size:12px;font-weight:700;letter-spacing:2px}h1{font-size:clamp(32px,5vw,52px);line-height:1.2;letter-spacing:-1.5px;margin:16px 0 22px}h2{font-size:21px;line-height:1.5;display:flex;gap:16px;align-items:baseline;margin:0 0 18px}h2 small{font:12px ui-monospace,monospace;color:var(--accent)}h3{font-size:18px;margin:0 0 8px}p{margin:0 0 14px;color:var(--muted)}.lead{font-size:19px;max-width:680px}.actions{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin-top:26px}.button{display:inline-block;background:var(--accent);color:white;padding:10px 20px;border-radius:6px;text-decoration:none;font-weight:600}section{padding:30px 0;border-top:1px solid var(--line)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}.grid p{font-size:15px}ol{padding-left:24px;color:var(--muted)}li{padding:5px 0}code{font:14px ui-monospace,monospace;background:#e7eee8;padding:2px 5px;border-radius:4px;overflow-wrap:anywhere}pre{background:var(--ink);color:#eff6ef;padding:18px 22px;border-radius:8px;overflow:auto}pre code{background:none;color:inherit;padding:0}.note{border-left:3px solid var(--accent);padding:12px 18px;background:#eaf0e9;margin-top:18px}.note p{margin:0}.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}footer{padding-top:24px;padding-bottom:32px;font-size:13px;color:var(--muted)}:focus-visible{outline:3px solid #c58e33;outline-offset:4px}@media(max-width:640px){header,main,footer{padding-left:20px;padding-right:20px}header{align-items:flex-start;flex-direction:column;gap:10px}nav{gap:16px}.hero{padding-top:40px}.grid{grid-template-columns:1fr;gap:16px}h1{letter-spacing:-.8px}}
+</style>
+</head>
+<body>
+<header>
+<a class="brand" data-page="index.html" href="index.html">Workflow Bot<span aria-hidden="true"> ↗</span></a>
+<nav aria-label="Navigation / 导航">
+<a data-page="index.html" href="index.html"><span data-zh="项目介绍" data-en="Overview">项目介绍</span></a>
+<a data-page="privacy.html" href="privacy.html" aria-current="page"><span data-zh="隐私说明" data-en="Privacy">隐私说明</span></a>
+<label class="sr-only" for="language"><span data-zh="选择语言" data-en="Select language">选择语言</span></label>
+<select id="language"><option value="zh">中文</option><option value="en">English</option></select>
+</nav>
+</header>
+<main>
+<div class="hero"><div class="eyebrow">DAILY WORKFLOW BOT</div><h1><span data-zh="隐私与数据使用" data-en="Privacy and data use">隐私与数据使用</span></h1><p class="lead"><span data-zh="了解页面保存什么，以及运行 Workflow Bot 时数据如何流转。" data-en="Understand what these pages store and how data flows when you run Workflow Bot.">了解页面保存什么，以及运行 Workflow Bot 时数据如何流转。</span></p></div>
+<section><h2><small>01</small><span data-zh="访问本页面" data-en="Visiting these pages">访问本页面</span></h2><p><span data-zh="这两个静态页面不调用 Google 或 OpenAI API，也不含分析或广告脚本。浏览器本地仅保存你的语言选择；托管服务可能记录访问日志。" data-en="These static pages do not call Google or OpenAI APIs and contain no analytics or advertising scripts. Browser storage saves only your language choice; the hosting service may record access logs.">这两个静态页面不调用 Google 或 OpenAI API，也不含分析或广告脚本。浏览器本地仅保存你的语言选择；托管服务可能记录访问日志。</span></p></section><section><h2><small>02</small><span data-zh="运行工具时使用的数据" data-en="Data used when running the bot">运行工具时使用的数据</span></h2><p><span data-zh="日历：通过只读权限获取当天事件，用于生成包含时间、标题、地点及会议链接的日报。" data-en="Calendar: read-only access retrieves today’s events for a digest with times, titles, locations and meeting links.">日历：通过只读权限获取当天事件，用于生成包含时间、标题、地点及会议链接的日报。</span></p><p><span data-zh="Gmail：使用发送权限，将日报发送到你配置的收件地址；代码不读取收件箱。" data-en="Gmail: send permission delivers the digest to your configured recipient; the code does not read your inbox.">Gmail：使用发送权限，将日报发送到你配置的收件地址；代码不读取收件箱。</span></p><p><span data-zh="论文与 AI：将完整论文 PDF 发送给 OpenAI，读取文字与页面图像后生成摘要。当前流程不将日历事件发送给 OpenAI。" data-en="Papers and AI: complete paper PDFs are sent to OpenAI for summarization using text and page images. The current flow does not send calendar events to OpenAI.">论文与 AI：将完整论文 PDF 发送给 OpenAI，读取文字与页面图像后生成摘要。当前流程不将日历事件发送给 OpenAI。</span></p></section><section><h2><small>03</small><span data-zh="存储与第三方服务" data-en="Storage and third-party services">存储与第三方服务</span></h2><p><span data-zh="OAuth 凭据与令牌保存在运行环境的文件中；API 密钥从环境变量读取。论文摘要保存到仓库目录；当前流程在内存中读取 PDF，不创建临时 PDF 文件。" data-en="OAuth credentials and tokens are stored as files in the runtime environment; the API key is read from an environment variable. Paper summaries are saved in the repository directory; the current flow reads PDFs in memory without creating temporary PDF files.">OAuth 凭据与令牌保存在运行环境的文件中；API 密钥从环境变量读取。论文摘要保存到仓库目录；当前流程在内存中读取 PDF，不创建临时 PDF 文件。</span></p><p><span data-zh="邮件通过 Google 处理，论文 PDF 通过 OpenAI 处理；具体保留规则取决于相应服务及你的配置。收件人可以保存或转发日报。" data-en="Google processes email and OpenAI processes paper PDFs; retention depends on each service and your configuration. Recipients can save or forward digests.">邮件通过 Google 处理，论文 PDF 通过 OpenAI 处理；具体保留规则取决于相应服务及你的配置。收件人可以保存或转发日报。</span></p><p><span data-zh="使用 GitHub Actions 时，凭据由你配置为仓库 Secrets。现有工作流会提交工作目录中的变更，请检查提交内容，避免发布令牌或私人数据。" data-en="When using GitHub Actions, you configure credentials as repository Secrets. The existing workflow commits changes in the working directory; review those changes to avoid publishing tokens or private data.">使用 GitHub Actions 时，凭据由你配置为仓库 Secrets。现有工作流会提交工作目录中的变更，请检查提交内容，避免发布令牌或私人数据。</span></p></section><section><h2><small>04</small><span data-zh="停止使用与删除" data-en="Stop access and delete data">停止使用与删除</span></h2><p><span data-zh="停止本地任务或禁用 GitHub Actions 定时任务，并在 Google 账号中撤销该应用的授权。删除运行环境中的令牌、凭据、临时 PDF 和不再需要的摘要。" data-en="Stop local jobs or disable the GitHub Actions schedule, then revoke the app’s access in your Google account. Delete runtime tokens, credentials, temporary PDFs and summaries you no longer need.">停止本地任务或禁用 GitHub Actions 定时任务，并在 Google 账号中撤销该应用的授权。删除运行环境中的令牌、凭据、临时 PDF 和不再需要的摘要。</span></p><p><span data-zh="已发送的邮件和已提交的仓库历史需要分别处理。清除浏览器的站点存储可移除语言偏好。" data-en="Sent emails and committed repository history must be handled separately. Clear browser site storage to remove the language preference.">已发送的邮件和已提交的仓库历史需要分别处理。清除浏览器的站点存储可移除语言偏好。</span></p></section><section><h2><small>05</small><span data-zh="联系与更新" data-en="Contact and updates">联系与更新</span></h2><p><span data-zh="如有问题，请通过项目 Issues 联系维护者，勿提交密钥、令牌或私人日程。" data-en="For questions, contact the maintainer through project Issues. Do not include keys, tokens or private calendar details.">如有问题，请通过项目 Issues 联系维护者，勿提交密钥、令牌或私人日程。</span></p><a href="https://github.com/Jingyi-Official/workflow-bot/issues"><span data-zh="前往项目 Issues" data-en="Open project Issues">前往项目 Issues</span></a><p><span data-zh="更新日期：2026 年 10 月 12 日。此说明对应当前仓库实现。" data-en="Updated: 12 October 2026. This notice describes the current repository implementation.">更新日期：2026 年 10 月 12 日。此说明对应当前仓库实现。</span></p></section>
+<noscript><p>语言切换需要启用 JavaScript。 / Enable JavaScript to switch languages.</p></noscript>
+</main>
+<footer>Workflow Bot · <a href="https://github.com/Jingyi-Official/workflow-bot">GitHub</a> · <span data-zh="自主部署，每日汇总。" data-en="Self-hosted. Delivered daily.">自主部署，每日汇总。</span></footer>
+<script>
+(() => {
+  const select = document.getElementById('language');
+  const valid = value => value === 'zh' || value === 'en';
+  function apply(lang) {
+    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
+    document.querySelectorAll('[data-zh][data-en]').forEach(node => {
+      node.textContent = node.dataset[lang];
+    });
+    document.title = document.querySelector('h1').textContent + ' · Workflow Bot';
+    document.querySelector('meta[name="description"]').content = document.querySelector('.lead').textContent;
+    select.value = lang;
+    document.querySelectorAll('a[data-page]').forEach(link => {
+      link.href = link.dataset.page + '?lang=' + lang;
+    });
+  }
+  let saved;
+  try { saved = localStorage.getItem('workflow-bot-language'); } catch (_) {}
+  const query = new URLSearchParams(location.search).get('lang');
+  apply(valid(query) ? query : valid(saved) ? saved : navigator.language.toLowerCase().startsWith('zh') ? 'zh' : 'en');
+  select.addEventListener('change', () => {
+    apply(select.value);
+    try { localStorage.setItem('workflow-bot-language', select.value); } catch (_) {}
+    try {
+      const url = new URL(location.href);
+      url.searchParams.set('lang', select.value);
+      history.replaceState(null, '', url);
+    } catch (_) {}
+  });
+})();
+</script>
+</body>
+</html>

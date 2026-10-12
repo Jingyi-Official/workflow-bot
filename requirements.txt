@@ -1,6 +1,6 @@
 # core
 arxiv>=2.1.0
-openai>=1.10.0,<2        
+openai>=2.0.0,<3
 pypdf>=4.2.0
 tqdm>=4.66.0
 markdown>=3.6  
