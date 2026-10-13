@@ -56,6 +56,8 @@ The default model is `gpt-6-astra` (override with `OPENAI_MODEL`). The Responses
 
 默认使用 `gpt-6-astra`（可通过 `OPENAI_MODEL` 覆盖）。Responses API 读取完整 PDF 的文字与高清页面图像，输出严格 JSON 摘要。单份 PDF 必须小于 50 MB，且不超过模型上下文限制。此方式比纯文本读取消耗更多 token；失败会记录到日报，不会静默截断论文。
 
+摘要写作规则位于 [`configs/paper_summary.md`](configs/paper_summary.md)，每次生成时连同模板注释发送给模型。规则参考 [asd-ste100](https://github.com/danyuchn/asd-ste100-skill) 的 STE-flavored 模式和 [karpathy-guidelines](https://github.com/multica-ai/andrej-karpathy-skills)：使用清晰短句和一致术语，保留论文的条件与不确定性，并核对事实依据。默认仍输出中文；英文词数规则仅用于英文内容。这些规则随项目运行，无需在运行设备上安装 Codex skills，也不代表官方 STE 认证。
+
 ### 5. Run the bot
 ```bash
 # Set Topics & Keywords in main.py
