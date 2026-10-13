@@ -20,8 +20,8 @@ KEYWORDS["digital humans and drivable avatars"] = ["head avatars", "full-body av
 KEYWORDS["video generation"] = ["video generation", "diffusion models", "video Continuation", "temporal autoregression"]
 KEYWORDS["world models"] = ["world models"]
 
-# Final papers per keyword; preferences live in configs/paper_preferences.json.
-MAX_RESULTS = 3
+# Final papers per topic across all keywords; preferences live in configs/paper_preferences.json.
+MAX_RESULTS_PER_TOPIC = 5
 
 
 def paper_topic_sections(source: str, keywords_by_topic: dict) -> list[dict]:
@@ -64,7 +64,7 @@ def main():
     # 1) ----------- generate daily arXiv digest -----------
     arXiv_md = run_daily_digest(
         keywords_by_topic=KEYWORDS,
-        max_results_per_query=MAX_RESULTS,
+        max_results_per_topic=MAX_RESULTS_PER_TOPIC,
         summarize_pdf_fn=summarize_pdf,
         summary_to_markdown_fn=summary_to_markdown,
     )
@@ -76,14 +76,14 @@ def main():
 
     # 3) ----------- write email -----------
     today = datetime.now().strftime("%Y-%m-%d")
-    subject_prefix = os.getenv("EMAIL_SUBJECT_PREFIX", "[Daily Digest]")
+    subject_prefix = os.getenv("EMAIL_SUBJECT_PREFIX", "[Weekly Digest]")
     subject = f"{subject_prefix} {today}"
 
     env = Environment(loader=FileSystemLoader(str(CONFIGS_DIR)))
     template = env.get_template("email_template.html")
 
     combined_html = template.render(
-        title=f"Daily Digest {today}",
+        title=f"Weekly Digest {today}",
         paper_topics=paper_topics,
         cal_html=cal_html
     )

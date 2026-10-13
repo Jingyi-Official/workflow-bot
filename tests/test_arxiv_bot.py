@@ -103,5 +103,59 @@ class DigestTests(unittest.TestCase):
         self.assertNotIn("(No results)", text)
 
 
+class TopicLimitTests(unittest.TestCase):
+    def paper(self, number, version=1):
+        url = f"https://arxiv.org/abs/2601.{number:05d}v{version}"
+        return SimpleNamespace(entry_id=url, pdf_url=url.replace("/abs/", "/pdf/"),
+                               title=f"Paper {number}")
+
+    def digest(self, topics, outcomes, fail_url=None):
+        ranker = Mock()
+        ranker.candidate_count.return_value = 30
+        # Reverse order makes later keywords rank ahead of the first keyword.
+        ranker.rank.side_effect = lambda papers: [
+            SimpleNamespace(result=p, reason=lambda: "test") for p in reversed(papers)]
+        def summarize(url):
+            if url == fail_url:
+                raise RuntimeError("summary unavailable")
+            return {}
+        summary = Mock(side_effect=summarize)
+        with TemporaryDirectory() as root, \
+             patch.dict(os.environ, {"OPENAI_API_KEY": "test"}), \
+             patch.object(bot, "PROJECT_DIR", Path(root)), \
+             patch.object(bot, "PaperRanker", return_value=ranker), \
+             patch.object(bot, "make_client"), \
+             patch.object(bot, "get_papers", side_effect=outcomes):
+            path = bot.run_daily_digest(
+                topics, max_results_per_topic=5, summarize_pdf_fn=summary,
+                summary_to_markdown_fn=lambda s: f"{s['paper_title']} {s['paper_url']}\n")
+            text = Path(path).read_text(encoding="utf-8")
+        return ranker, summary, text
+
+    def test_five_total_after_pooling_and_version_deduplication(self):
+        first = [self.paper(n) for n in range(6)]
+        second = [self.paper(0, 2)] + [self.paper(n) for n in range(6, 9)]
+        ranker, summary, text = self.digest({"avatars": ["heads", "body"]}, [first, second])
+        self.assertEqual(len(ranker.rank.call_args.args[0]), 9)
+        self.assertEqual(summary.call_count, 5)
+        self.assertEqual(summary.call_args_list[0].args[0], self.paper(8).pdf_url)
+        self.assertIn("Paper 8", text)
+        self.assertNotIn("Paper 0", text)
+
+    def test_each_topic_has_its_own_limit(self):
+        outcomes = [[self.paper(n) for n in range(7)], [self.paper(n) for n in range(10, 17)]]
+        ranker, summary, _ = self.digest({"avatars": ["heads"], "video": ["video"]}, outcomes)
+        self.assertEqual(summary.call_count, 10)
+        self.assertEqual(ranker.rank.call_count, 2)
+
+    def test_failed_summary_is_replaced_and_small_pool_is_allowed(self):
+        papers = [self.paper(n) for n in range(6)]
+        _, summary, text = self.digest({"avatars": ["heads"]}, [papers], papers[-1].pdf_url)
+        self.assertEqual(summary.call_count, 6)
+        self.assertEqual(text.count(" (summary failed:"), 1)
+        _, summary, _ = self.digest({"avatars": ["heads"]}, [papers[:2]])
+        self.assertEqual(summary.call_count, 2)
+
+
 if __name__ == "__main__":
     unittest.main()
