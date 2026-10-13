@@ -1,18 +1,31 @@
 # arxiv_bot.py
 import os
+import random
 import re
+import time
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List
 
 import arxiv
+from requests.exceptions import ConnectionError, Timeout
 
 from . import PROJECT_DIR
 from .paper_filter import CONFIG_PATH, PaperRanker, paper_id
 
 
 # ----------- arXiv client -----------
-def make_client(page_size: int = 3, delay_seconds: int = 3, num_retries: int = 3) -> arxiv.Client:
+RETRYABLE_HTTP_STATUS = {429, 500, 502, 503, 504}
+QUERY_ATTEMPTS = 4
+QUERY_DELAY_SECONDS = 10
+
+
+class ArxivUnavailableError(RuntimeError):
+    """A query exhausted its retries for a temporary upstream failure."""
+
+
+def make_client(page_size: int = 3, delay_seconds: int = QUERY_DELAY_SECONDS,
+                num_retries: int = 0) -> arxiv.Client:
     return arxiv.Client(
         page_size=page_size,
         delay_seconds=delay_seconds,
@@ -27,7 +40,22 @@ def get_papers(client: arxiv.Client, query: str, max_results: int = 100) -> List
         sort_by=arxiv.SortCriterion.SubmittedDate,
         sort_order=arxiv.SortOrder.Descending,
     )
-    return list(client.results(search))
+    # PDF inspection may have made an arXiv request since the last API query.
+    # Leave a quiet interval before starting; reuse the client for page pacing.
+    time.sleep(QUERY_DELAY_SECONDS)
+    for attempt in range(QUERY_ATTEMPTS):
+        try:
+            return list(client.results(search))
+        except (arxiv.HTTPError, ConnectionError, Timeout) as error:
+            if isinstance(error, arxiv.HTTPError) and error.status not in RETRYABLE_HTTP_STATUS:
+                raise
+            if attempt == QUERY_ATTEMPTS - 1:
+                raise ArxivUnavailableError(
+                    f"arXiv query {query!r} failed after {QUERY_ATTEMPTS} attempts: {error}"
+                ) from error
+            wait = 60 * (2 ** attempt) + random.uniform(0, 10)
+            print(f"[WARN] arXiv query {query!r}: {error}; retry in {wait:.0f}s", flush=True)
+            time.sleep(wait)
 
 
 # ----------- File I/O utils -----------
@@ -105,8 +133,16 @@ def run_daily_digest(
         append_text(out_md, f"\n## {topic}\n")
         for kw in keywords:
             append_text(out_md, f"\n### {kw}\n")
-            results = get_papers(client, query=kw, max_results=candidate_count)
-            ranker.note_api_request()
+            try:
+                results = get_papers(client, query=kw, max_results=candidate_count)
+            except ArxivUnavailableError as error:
+                print(f"::warning::{error}", flush=True)
+                append_text(out_md,
+                            "- **Query unavailable:** arXiv remained unavailable after retries. "
+                            "This section is incomplete; it does not mean there are no matching papers.\n")
+                continue
+            finally:
+                ranker.note_api_request()
             if not results:
                 append_text(out_md, "- (No results)\n")
                 continue

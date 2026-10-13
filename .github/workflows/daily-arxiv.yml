@@ -8,6 +8,10 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: daily-arxiv
+  cancel-in-progress: false
+
 jobs:
   run:
     runs-on: ubuntu-latest
