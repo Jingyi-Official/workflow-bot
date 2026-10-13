@@ -1,8 +1,9 @@
-name: Daily Digest Bot
+name: Weekly Digest Bot
 
 on:
   schedule:
-    - cron: "30 6 * * *"   
+    - cron: "0 9 * * 6"
+      timezone: "Europe/London"
   workflow_dispatch:       
 
 permissions:
@@ -46,5 +47,5 @@ jobs:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
           EMAIL_TO: ${{ secrets.EMAIL_TO }}
-          EMAIL_SUBJECT_PREFIX: "[Daily Digest]"
+          EMAIL_SUBJECT_PREFIX: "[Weekly Digest]"
         run: python main.py
